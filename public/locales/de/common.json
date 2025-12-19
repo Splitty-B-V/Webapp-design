@@ -201,5 +201,6 @@
   "subWine": "WEIN",
   "subKidsFood": "KINDERESSEN",
   "subKidsDrinks": "KINDERGETRÄNKE",
-  "subKidsDesserts": "KINDERDESSERTS"
+  "subKidsDesserts": "KINDERDESSERTS",
+  "price": "Preis"
 }

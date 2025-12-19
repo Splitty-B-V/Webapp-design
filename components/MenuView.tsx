@@ -13,6 +13,12 @@ interface MenuViewProps {
   onViewBill?: () => void
 }
 
+// Fallback placeholder image for items without photos
+const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=400&fit=crop'
+
+// Helper to get image with fallback
+const getImageUrl = (image?: string) => image || PLACEHOLDER_IMAGE
+
 interface MenuItem {
   id: string
   name: string
@@ -48,7 +54,7 @@ const menuCategories: MenuCategory[] = [
         nameKey: 'subBreakfast',
         fallbackName: 'ONTBIJT',
         items: [
-          { id: 'f1', name: 'Eggs Benedict', description: 'Gepocheerde eieren met hollandaisesaus op brioche', price: 12.50, image: 'https://images.unsplash.com/photo-1608039829572-9b8d0041a1b6?w=200&h=200&fit=crop' },
+          { id: 'f1', name: 'Eggs Benedict', description: 'Gepocheerde eieren met hollandaisesaus op brioche', price: 12.50, image: '' },
           { id: 'f2', name: 'Pancakes', description: 'Fluffy pancakes met maple syrup en vers fruit', price: 10.00, image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200&h=200&fit=crop' },
           { id: 'f3', name: 'Avocado Toast', description: 'Geroosterd zuurdesembrood met avocado en gepocheerd ei', price: 11.50, image: 'https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=200&h=200&fit=crop' },
           { id: 'f4', name: 'Croissant', description: 'Verse boter croissant met jam en boter', price: 4.50, image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&h=200&fit=crop' },
@@ -203,6 +209,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
   const [activeSubCategory, setActiveSubCategory] = useState<string | null>(null)
   const [cart, setCart] = useState<CartItem[]>([])
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedProduct, setSelectedProduct] = useState<MenuItem | null>(null)
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
@@ -215,7 +222,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
   // Get all items for search
   const allItems = menuCategories.flatMap(c =>
     c.subCategories.flatMap(s =>
-      s.items.map(item => ({ ...item, subCategoryName: s.name, mainCategoryName: c.fallbackTitle }))
+      s.items.map(item => ({ ...item, subCategoryName: s.fallbackName, subCategoryKey: s.nameKey, mainCategoryName: c.fallbackTitle }))
     )
   )
 
@@ -483,19 +490,20 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                   {searchResults.map((item) => (
                     <div
                       key={item.id}
-                      className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
+                      onClick={() => setSelectedProduct(item)}
+                      className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow active:scale-[0.98]"
                     >
                       <div className="flex p-4 gap-4">
                         <div className="relative w-24 h-24 flex-shrink-0">
                           <Image
-                            src={item.image}
+                            src={getImageUrl(item.image)}
                             alt={item.name}
                             fill
                             className="object-cover rounded-xl"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs text-gray-400 mb-1">{item.subCategoryName}</p>
+                          <p className="text-xs text-gray-400 mb-1">{t(item.subCategoryKey) || item.subCategoryName}</p>
                           <h3 className="font-semibold text-gray-900 text-base mb-1">{item.name}</h3>
                           <p className="text-gray-500 text-sm line-clamp-2 mb-2">{item.description}</p>
                           <span className="font-bold text-gray-900 text-lg">
@@ -540,13 +548,14 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                       {subCategory.items.map((item) => (
                         <div
                           key={item.id}
-                          className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                          onClick={() => setSelectedProduct(item)}
+                          className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer active:scale-[0.98]"
                         >
                           <div className="flex p-4 gap-4">
                             {/* Item Image */}
                             <div className="relative w-24 h-24 flex-shrink-0">
                               <Image
-                                src={item.image}
+                                src={getImageUrl(item.image)}
                                 alt={item.name}
                                 fill
                                 className="object-cover rounded-xl"
@@ -586,6 +595,78 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                 <span className="bg-white/20 px-3 py-1 rounded-lg">€{remainingAmount.toFixed(2).replace('.', ',')}</span>
               </button>
             </div>
+          )}
+
+          {/* Product Detail Popup */}
+          {selectedProduct && (
+            <>
+              {/* Backdrop */}
+              <div
+                className="fixed inset-0 bg-black/60 z-[60] animate-fade-in"
+                onClick={() => setSelectedProduct(null)}
+              />
+
+              {/* Bottom Drawer */}
+              <div className="fixed inset-x-0 bottom-0 z-[70] animate-slide-up">
+                <div className="max-w-[500px] mx-auto">
+                  <div className="bg-white rounded-t-3xl shadow-2xl max-h-[85vh] overflow-hidden flex flex-col">
+                    {/* Product Image */}
+                    <div className="relative w-full h-56 sm:h-64 flex-shrink-0">
+                      <Image
+                        src={getImageUrl(selectedProduct.image).replace('w=200&h=200', 'w=800&h=600').replace('w=400&h=400', 'w=800&h=600')}
+                        alt={selectedProduct.name}
+                        fill
+                        className="object-cover"
+                      />
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+                      {/* Close button */}
+                      <button
+                        onClick={() => setSelectedProduct(null)}
+                        className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+                      >
+                        <svg className="w-5 h-5 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7a.996.996 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 overflow-y-auto px-5 py-5 sm:px-6 sm:py-6" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                      {/* Product Name */}
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                        {selectedProduct.name}
+                      </h2>
+
+                      {/* Description */}
+                      <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+                        {selectedProduct.description}
+                      </p>
+
+                      {/* Price */}
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <span className="text-gray-500 text-sm">{t('price') || 'Prijs'}</span>
+                        <span className="text-2xl sm:text-3xl font-bold text-gray-900">
+                          €{selectedProduct.price.toFixed(2).replace('.', ',')}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Close Button */}
+                    <div className="px-5 pb-6 pt-2 sm:px-6 sm:pb-8 bg-white border-t border-gray-100">
+                      <button
+                        onClick={() => setSelectedProduct(null)}
+                        className="w-full py-3.5 px-5 rounded-xl bg-gray-900 text-white font-semibold text-sm hover:bg-black active:scale-[0.98] transition-all"
+                      >
+                        {t('close') || 'Sluiten'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </>
           )}
         </div>
       </div>

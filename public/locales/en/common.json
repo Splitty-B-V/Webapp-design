@@ -201,5 +201,6 @@
   "subWine": "WINE",
   "subKidsFood": "KIDS FOOD",
   "subKidsDrinks": "KIDS DRINKS",
-  "subKidsDesserts": "KIDS DESSERTS"
+  "subKidsDesserts": "KIDS DESSERTS",
+  "price": "Price"
 }

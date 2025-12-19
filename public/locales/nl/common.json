@@ -202,5 +202,6 @@
   "subWine": "WIJN",
   "subKidsFood": "KINDERETEN",
   "subKidsDrinks": "KINDERDRANKEN",
-  "subKidsDesserts": "KINDERDESSERTS"
+  "subKidsDesserts": "KINDERDESSERTS",
+  "price": "Prijs"
 }
