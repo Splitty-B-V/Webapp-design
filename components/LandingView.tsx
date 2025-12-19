@@ -21,7 +21,33 @@ export default function LandingView({ onViewBill, onViewMenu }: LandingViewProps
   const totalItems = orderItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
-    <div className="min-h-screen bg-[#dcf5e5]" style={{ overscrollBehavior: 'none' }}>
+    <div className="min-h-screen bg-[#dcf5e5] relative" style={{ overscrollBehavior: 'none' }}>
+      {/* Decorative side patterns */}
+      <div
+        className="fixed left-0 top-0 bottom-0 pointer-events-none"
+        style={{
+          width: 'calc((100vw - 500px) / 2)',
+          minWidth: '50px',
+          backgroundImage: 'url(/images/side-pattern.svg)',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat-y',
+          backgroundSize: 'cover',
+          zIndex: 10
+        }}
+      />
+      <div
+        className="fixed right-0 top-0 bottom-0 pointer-events-none"
+        style={{
+          width: 'calc((100vw - 500px) / 2)',
+          minWidth: '50px',
+          backgroundImage: 'url(/images/side-pattern.svg)',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat-y',
+          backgroundSize: 'cover',
+          zIndex: 10
+        }}
+      />
+
       {/* Debug Toggle Button */}
       <button
         onClick={() => setHasOrdered(!hasOrdered)}

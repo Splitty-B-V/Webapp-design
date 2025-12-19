@@ -145,7 +145,33 @@ export default function BillPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#dcf5e5]" style={{ overscrollBehavior: 'none' }}>
+    <div
+      className="min-h-screen bg-[#dcf5e5] relative"
+      style={{ overscrollBehavior: 'none' }}
+    >
+      {/* Decorative side patterns */}
+      <div
+        className="fixed left-0 top-0 bottom-0 pointer-events-none"
+        style={{
+          width: 'calc((100vw - 500px) / 2)',
+          backgroundImage: 'url(/images/side-pattern.svg)',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat-y',
+          backgroundSize: 'cover',
+          zIndex: 10
+        }}
+      />
+      <div
+        className="fixed right-0 top-0 bottom-0 pointer-events-none"
+        style={{
+          width: 'calc((100vw - 500px) / 2)',
+          backgroundImage: 'url(/images/side-pattern.svg)',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat-y',
+          backgroundSize: 'cover',
+          zIndex: 10
+        }}
+      />
       <div className="flex flex-col min-h-screen max-w-[500px] mx-auto w-full" style={{ overscrollBehavior: 'none' }}>
         {/* Restaurant Banner */}
         <section 
@@ -167,7 +193,7 @@ export default function BillPage() {
           ></div>
         </section>
         
-        <main className="w-full flex-grow">
+        <main className="w-full flex-grow flex flex-col bg-white">
           {/* Spacing for logo overlap */}
           <div className="h-16 bg-white flex items-center justify-end px-4">
             <button
@@ -269,41 +295,41 @@ export default function BillPage() {
               {/* BTW Section */}
               <BTWSummary btwBreakdown={btwBreakdown} totalBTW={totalBTW} />
             </div>
-            
-            {/* Splitty Branding */}
-            <div className="relative" style={{ backgroundColor: '#f7fef9' }}>
-              <div className="relative px-4 py-6 sm:px-6 sm:py-8">
-                {/* Logo section */}
-                <div className="flex flex-col items-center mb-4 sm:mb-5">
-                  <Image 
-                    src="/images/logo-trans.png" 
-                    alt="Splitty" 
-                    width={60} 
-                    height={21}
-                    className="mb-2 sm:mb-3 sm:w-20 sm:h-7"
-                  />
-                  
-                  <p className="text-xs sm:text-sm font-medium text-gray-700">
-                    {t('payWithSmile')} 😊
-                  </p>
-                </div>
-                
-                {/* Links section */}
-                <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-[10px] sm:gap-x-3 sm:gap-y-1 sm:text-xs">
-                  <span className="text-gray-500">{t('poweredBy')}</span>
-                  <span className="text-gray-400">•</span>
-                  <a href="https://www.splitty.nl/algemene-voorwaarden" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 transition-colors">
-                    {t('terms')}
-                  </a>
-                  <span className="text-gray-400">•</span>
-                  <a href="https://www.splitty.nl/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 transition-colors">
-                    {t('privacy')}
-                  </a>
-                  <span className="text-gray-400">•</span>
-                  <a href="https://www.splitty.nl/contact" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 transition-colors">
-                    {t('contact')}
-                  </a>
-                </div>
+          </div>
+
+          {/* Splitty Branding - Always at bottom */}
+          <div className="mt-auto relative" style={{ backgroundColor: '#f7fef9' }}>
+            <div className="relative px-4 py-6 sm:px-6 sm:py-8">
+              {/* Logo section */}
+              <div className="flex flex-col items-center mb-4 sm:mb-5">
+                <Image
+                  src="/images/logo-trans.png"
+                  alt="Splitty"
+                  width={60}
+                  height={21}
+                  className="mb-2 sm:mb-3 sm:w-20 sm:h-7"
+                />
+
+                <p className="text-xs sm:text-sm font-medium text-gray-700">
+                  {t('payWithSmile')} 😊
+                </p>
+              </div>
+
+              {/* Links section */}
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-[10px] sm:gap-x-3 sm:gap-y-1 sm:text-xs">
+                <span className="text-gray-500">{t('poweredBy')}</span>
+                <span className="text-gray-400">•</span>
+                <a href="https://www.splitty.nl/algemene-voorwaarden" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 transition-colors">
+                  {t('terms')}
+                </a>
+                <span className="text-gray-400">•</span>
+                <a href="https://www.splitty.nl/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 transition-colors">
+                  {t('privacy')}
+                </a>
+                <span className="text-gray-400">•</span>
+                <a href="https://www.splitty.nl/contact" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-800 transition-colors">
+                  {t('contact')}
+                </a>
               </div>
             </div>
           </div>

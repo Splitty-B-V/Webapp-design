@@ -398,6 +398,29 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
           }
         `}</style>
         <div className="fixed inset-0 z-50 bg-[#dcf5e5] overflow-hidden animate-fade-in">
+          {/* Decorative side patterns */}
+          <div
+            className="fixed left-0 top-0 bottom-0 pointer-events-none"
+            style={{
+              width: 'calc((100vw - 500px) / 2)',
+              backgroundImage: 'url(/images/side-pattern.svg)',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'repeat-y',
+              backgroundSize: 'cover',
+              zIndex: 51
+            }}
+          />
+          <div
+            className="fixed right-0 top-0 bottom-0 pointer-events-none"
+            style={{
+              width: 'calc((100vw - 500px) / 2)',
+              backgroundImage: 'url(/images/side-pattern.svg)',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'repeat-y',
+              backgroundSize: 'cover',
+              zIndex: 51
+            }}
+          />
           <div className="max-w-[500px] mx-auto h-full bg-white flex flex-col overflow-hidden animate-slide-up-content">
           {/* Header */}
           <div className="sticky top-0 bg-white z-10 border-b border-gray-100">
