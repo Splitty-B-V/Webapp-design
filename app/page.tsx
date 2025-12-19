@@ -158,7 +158,7 @@ export default function BillPage() {
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat-y',
           backgroundSize: 'cover',
-          zIndex: 10
+          zIndex: 0
         }}
       />
       <div
@@ -169,10 +169,10 @@ export default function BillPage() {
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat-y',
           backgroundSize: 'cover',
-          zIndex: 10
+          zIndex: 0
         }}
       />
-      <div className="flex flex-col min-h-screen max-w-[500px] mx-auto w-full" style={{ overscrollBehavior: 'none' }}>
+      <div className="flex flex-col min-h-screen max-w-[500px] mx-auto w-full relative z-10" style={{ overscrollBehavior: 'none' }}>
         {/* Restaurant Banner */}
         <section 
           className="relative w-full h-48 bg-cover bg-center"

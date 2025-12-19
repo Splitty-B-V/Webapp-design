@@ -32,7 +32,7 @@ export default function LandingView({ onViewBill, onViewMenu }: LandingViewProps
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat-y',
           backgroundSize: 'cover',
-          zIndex: 10
+          zIndex: 0
         }}
       />
       <div
@@ -44,14 +44,14 @@ export default function LandingView({ onViewBill, onViewMenu }: LandingViewProps
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat-y',
           backgroundSize: 'cover',
-          zIndex: 10
+          zIndex: 0
         }}
       />
 
-      {/* Debug Toggle Button */}
+      {/* Debug Toggle Button - hidden on mobile */}
       <button
         onClick={() => setHasOrdered(!hasOrdered)}
-        className="fixed left-2 top-1/2 -translate-y-1/2 z-50 bg-white shadow-lg rounded-r-lg px-2 py-3 text-xs font-medium border border-l-0 border-gray-200"
+        className="hidden md:block fixed left-2 top-1/2 -translate-y-1/2 z-50 bg-white shadow-lg rounded-r-lg px-2 py-3 text-xs font-medium border border-l-0 border-gray-200"
       >
         <div className="flex flex-col items-center gap-1">
           <span className="text-gray-500">Test</span>
@@ -64,7 +64,7 @@ export default function LandingView({ onViewBill, onViewMenu }: LandingViewProps
         </div>
       </button>
 
-      <div className="flex flex-col min-h-screen max-w-[500px] mx-auto w-full" style={{ overscrollBehavior: 'none' }}>
+      <div className="flex flex-col min-h-screen max-w-[500px] mx-auto w-full relative z-10" style={{ overscrollBehavior: 'none' }}>
 
         {/* Restaurant Banner */}
         <section
