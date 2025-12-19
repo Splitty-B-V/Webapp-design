@@ -62,7 +62,7 @@ export default function PayForItemsView({ items, onBack, onContinue }: PayForIte
       </div>
 
       {/* Scrollable items list */}
-      <div className="flex-1 min-h-0 overflow-y-auto px-4">
+      <div className="flex-1 min-h-0 overflow-y-auto px-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         <div className="space-y-2 sm:space-y-3 pt-3 pb-4 sm:pt-4 sm:pb-6">
         {items
           .sort((a, b) => {

@@ -89,7 +89,7 @@ export default function PayForPeopleView({
       </div>
 
       {/* Main content */}
-      <div className="flex-1 px-4 py-3 sm:py-6 overflow-y-auto">
+      <div className="flex-1 px-4 py-3 sm:py-6 overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         <div className="bg-gray-50 rounded-2xl p-4 sm:p-6">
           {/* Progress indicator */}
           <div className="mb-6 sm:mb-8">

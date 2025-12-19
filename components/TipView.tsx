@@ -78,7 +78,7 @@ export default function TipView({ subtotal, serviceFee, onBack, onContinue }: Ti
       </div>
 
       {/* Main content */}
-      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto">
+      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         {/* Tip selection buttons */}
         <div className="grid grid-cols-4 gap-2 mb-3 sm:mb-4 mt-6">
           {tipOptions.map((option) => (

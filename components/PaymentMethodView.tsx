@@ -106,7 +106,7 @@ export default function PaymentMethodView({
       </div>
 
       {/* Main content */}
-      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto">
+      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         {/* Timer card */}
         <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6 border border-orange-200">
           <div className="flex items-center justify-between mb-2">

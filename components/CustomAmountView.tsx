@@ -117,7 +117,7 @@ export default function CustomAmountView({ total, onBack, onContinue }: CustomAm
       </div>
 
       {/* Main content */}
-      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto">
+      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         {/* Bill status */}
         <div className="mb-4 sm:mb-6">
           {/* Remaining to pay - highlighted */}

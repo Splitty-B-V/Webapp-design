@@ -40,7 +40,7 @@ export default function PayFullConfirmView({
       </div>
 
       {/* Main content */}
-      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto">
+      <div className="flex-1 px-4 pb-3 sm:pb-4 overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         {/* Icon and title */}
         <div className="text-center mb-4 sm:mb-6">
           <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 rounded-full bg-green-100 flex items-center justify-center">

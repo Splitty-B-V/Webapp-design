@@ -63,7 +63,7 @@ export default function PayEquallyPage() {
                   </div>
                 )}
               </div>
-              <div className="flex-1 px-4 py-3 sm:py-6 overflow-y-auto">
+              <div className="flex-1 px-4 py-3 sm:py-6 overflow-y-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 <div className="bg-gray-50 rounded-2xl p-4 sm:p-6">
                   <h3 className="text-center text-xs sm:text-sm font-medium text-gray-600 mb-4 sm:mb-6">{t('numberOfPeople')}</h3>
                   <div className="flex items-center justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
