@@ -186,5 +186,20 @@
   "selectMenu": "Select a menu",
   "menuFood": "FOOD",
   "menuBeverages": "BEVERAGES",
-  "menuKids": "KIDS MENU"
+  "menuKids": "KIDS MENU",
+  "search": "Search",
+  "resultsFound": "results found",
+  "noResultsFor": "No results found for",
+  "subBreakfast": "BREAKFAST",
+  "subItalian": "ITALIAN",
+  "subBurgers": "BURGERS",
+  "subSalads": "SALADS",
+  "subMains": "MAIN COURSES",
+  "subHotDrinks": "HOT DRINKS",
+  "subColdDrinks": "COLD DRINKS",
+  "subCocktails": "COCKTAILS",
+  "subWine": "WINE",
+  "subKidsFood": "KIDS FOOD",
+  "subKidsDrinks": "KIDS DRINKS",
+  "subKidsDesserts": "KIDS DESSERTS"
 }

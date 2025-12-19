@@ -186,5 +186,20 @@
   "selectMenu": "Wählen Sie ein Menü",
   "menuFood": "ESSEN",
   "menuBeverages": "GETRÄNKE",
-  "menuKids": "KINDERMENÜ"
+  "menuKids": "KINDERMENÜ",
+  "search": "Suchen",
+  "resultsFound": "Ergebnisse gefunden",
+  "noResultsFor": "Keine Ergebnisse gefunden für",
+  "subBreakfast": "FRÜHSTÜCK",
+  "subItalian": "ITALIENISCH",
+  "subBurgers": "BURGER",
+  "subSalads": "SALATE",
+  "subMains": "HAUPTGERICHTE",
+  "subHotDrinks": "HEISSE GETRÄNKE",
+  "subColdDrinks": "KALTE GETRÄNKE",
+  "subCocktails": "COCKTAILS",
+  "subWine": "WEIN",
+  "subKidsFood": "KINDERESSEN",
+  "subKidsDrinks": "KINDERGETRÄNKE",
+  "subKidsDesserts": "KINDERDESSERTS"
 }

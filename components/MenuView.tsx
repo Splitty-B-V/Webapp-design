@@ -23,7 +23,8 @@ interface MenuItem {
 
 interface SubCategory {
   id: string
-  name: string
+  nameKey: string
+  fallbackName: string
   items: MenuItem[]
 }
 
@@ -44,7 +45,8 @@ const menuCategories: MenuCategory[] = [
     subCategories: [
       {
         id: 'breakfast',
-        name: 'ONTBIJT',
+        nameKey: 'subBreakfast',
+        fallbackName: 'ONTBIJT',
         items: [
           { id: 'f1', name: 'Eggs Benedict', description: 'Gepocheerde eieren met hollandaisesaus op brioche', price: 12.50, image: 'https://images.unsplash.com/photo-1608039829572-9b8d0041a1b6?w=200&h=200&fit=crop' },
           { id: 'f2', name: 'Pancakes', description: 'Fluffy pancakes met maple syrup en vers fruit', price: 10.00, image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200&h=200&fit=crop' },
@@ -54,7 +56,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'italian',
-        name: 'ITALIAANS',
+        nameKey: 'subItalian',
+        fallbackName: 'ITALIAANS',
         items: [
           { id: 'f5', name: 'Margherita Pizza', description: 'Klassieke Italiaanse pizza met verse mozzarella, tomaat en basilicum', price: 14.50, image: 'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=200&h=200&fit=crop' },
           { id: 'f6', name: 'Pasta Carbonara', description: 'Romige pasta met spek, ei, pecorino en zwarte peper', price: 15.00, image: 'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=200&h=200&fit=crop' },
@@ -64,7 +67,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'burgers',
-        name: 'BURGERS',
+        nameKey: 'subBurgers',
+        fallbackName: 'BURGERS',
         items: [
           { id: 'f9', name: 'Classic Beef Burger', description: '200g Black Angus beef met cheddar, bacon en truffelmayo', price: 18.50, image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=200&fit=crop' },
           { id: 'f10', name: 'Chicken Burger', description: 'Krokante kip met sla, tomaat en knoflooksaus', price: 15.50, image: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=200&h=200&fit=crop' },
@@ -73,7 +77,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'salads',
-        name: 'SALADES',
+        nameKey: 'subSalads',
+        fallbackName: 'SALADES',
         items: [
           { id: 'f12', name: 'Caesar Salad', description: 'Knapperige romaine sla, parmezaan, croutons en huisgemaakte dressing', price: 11.00, image: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=200&h=200&fit=crop' },
           { id: 'f13', name: 'Greek Salad', description: 'Tomaat, komkommer, olijven, feta en rode ui', price: 10.50, image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=200&h=200&fit=crop' },
@@ -82,7 +87,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'mains',
-        name: 'HOOFDGERECHTEN',
+        nameKey: 'subMains',
+        fallbackName: 'HOOFDGERECHTEN',
         items: [
           { id: 'f15', name: 'Gegrilde Zalm', description: 'Verse zalmfilet met seizoensgroenten en citroenbotersaus', price: 22.00, image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=200&h=200&fit=crop' },
           { id: 'f16', name: 'Ribeye Steak', description: '300g ribeye met peppersaus en gebakken aardappelen', price: 28.50, image: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=200&h=200&fit=crop' },
@@ -100,7 +106,8 @@ const menuCategories: MenuCategory[] = [
     subCategories: [
       {
         id: 'hot-drinks',
-        name: 'WARME DRANKEN',
+        nameKey: 'subHotDrinks',
+        fallbackName: 'WARME DRANKEN',
         items: [
           { id: 'b1', name: 'Espresso', description: 'Sterke Italiaanse koffie, perfect gebrouwen', price: 2.80, image: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=200&h=200&fit=crop' },
           { id: 'b2', name: 'Cappuccino', description: 'Espresso met opgeschuimde melk en cacaopoeder', price: 3.50, image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&h=200&fit=crop' },
@@ -111,7 +118,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'cold-drinks',
-        name: 'KOUDE DRANKEN',
+        nameKey: 'subColdDrinks',
+        fallbackName: 'KOUDE DRANKEN',
         items: [
           { id: 'b6', name: 'Fresh Orange Juice', description: 'Vers geperst sinaasappelsap', price: 4.50, image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=200&h=200&fit=crop' },
           { id: 'b7', name: 'Iced Coffee', description: 'Koude espresso met melk en ijs', price: 4.50, image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&h=200&fit=crop' },
@@ -122,7 +130,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'cocktails',
-        name: 'COCKTAILS',
+        nameKey: 'subCocktails',
+        fallbackName: 'COCKTAILS',
         items: [
           { id: 'b11', name: 'Mojito', description: 'Klassieke cocktail met rum, munt, limoen en soda', price: 9.00, image: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=200&h=200&fit=crop' },
           { id: 'b12', name: 'Margarita', description: 'Tequila, triple sec en limoen', price: 9.50, image: 'https://images.unsplash.com/photo-1556855810-ac404aa91e85?w=200&h=200&fit=crop' },
@@ -132,7 +141,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'wine',
-        name: 'WIJN',
+        nameKey: 'subWine',
+        fallbackName: 'WIJN',
         items: [
           { id: 'b15', name: 'Huiswijn Wit', description: 'Glas huiswijn wit 150ml', price: 5.00, image: 'https://images.unsplash.com/photo-1474722883778-792e7990302f?w=200&h=200&fit=crop' },
           { id: 'b16', name: 'Huiswijn Rood', description: 'Glas huiswijn rood 150ml', price: 5.00, image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200&h=200&fit=crop' },
@@ -149,7 +159,8 @@ const menuCategories: MenuCategory[] = [
     subCategories: [
       {
         id: 'kids-food',
-        name: 'KINDERETEN',
+        nameKey: 'subKidsFood',
+        fallbackName: 'KINDERETEN',
         items: [
           { id: 'k1', name: 'Mini Hamburger', description: 'Klein hamburgerje met frietjes en ketchup', price: 8.50, image: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?w=200&h=200&fit=crop' },
           { id: 'k2', name: 'Pasta met Kaassaus', description: 'Romige pasta met zachte kaassaus', price: 7.00, image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=200&h=200&fit=crop' },
@@ -160,7 +171,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'kids-drinks',
-        name: 'KINDERDRANKEN',
+        nameKey: 'subKidsDrinks',
+        fallbackName: 'KINDERDRANKEN',
         items: [
           { id: 'k6', name: 'Appelsap', description: 'Vers appelsap 200ml', price: 2.50, image: 'https://images.unsplash.com/photo-1576673442511-7e39b6545c87?w=200&h=200&fit=crop' },
           { id: 'k7', name: 'Chocomel', description: 'Koude chocolademelk 200ml', price: 2.50, image: 'https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=200&h=200&fit=crop' },
@@ -169,7 +181,8 @@ const menuCategories: MenuCategory[] = [
       },
       {
         id: 'kids-desserts',
-        name: 'KINDERDESSERTS',
+        nameKey: 'subKidsDesserts',
+        fallbackName: 'KINDERDESSERTS',
         items: [
           { id: 'k9', name: 'IJsje', description: '2 bolletjes ijs naar keuze', price: 4.00, image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=200&h=200&fit=crop' },
           { id: 'k10', name: 'Brownie', description: 'Warme chocolade brownie met ijs', price: 5.50, image: 'https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=200&h=200&fit=crop' },
@@ -388,7 +401,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                   </svg>
                   <input
                     type="text"
-                    placeholder="Zoek"
+                    placeholder={t('search') || 'Zoek'}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="ml-3 bg-transparent outline-none text-gray-700 placeholder-gray-400 text-sm w-full"
@@ -450,7 +463,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                         : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                     }`}
                   >
-                    {subCat.name}
+                    {t(subCat.nameKey) || subCat.fallbackName}
                   </button>
                 ))}
               </div>
@@ -466,7 +479,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
             >
               {searchResults.length > 0 ? (
                 <div className="space-y-3">
-                  <p className="text-sm text-gray-500 mb-4">{searchResults.length} resultaten gevonden</p>
+                  <p className="text-sm text-gray-500 mb-4">{searchResults.length} {t('resultsFound') || 'resultaten gevonden'}</p>
                   {searchResults.map((item) => (
                     <div
                       key={item.id}
@@ -498,7 +511,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                   <svg className="w-16 h-16 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
-                  <p className="text-gray-500 text-center">Geen resultaten gevonden voor "{searchQuery}"</p>
+                  <p className="text-gray-500 text-center">{t('noResultsFor') || 'Geen resultaten gevonden voor'} "{searchQuery}"</p>
                 </div>
               )}
             </div>
@@ -519,7 +532,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                   >
                     {/* Subcategory Header */}
                     <h2 className="text-base font-bold text-gray-900 mb-4">
-                      {subCategory.name}
+                      {t(subCategory.nameKey) || subCategory.fallbackName}
                     </h2>
 
                     {/* Items */}
@@ -569,7 +582,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                 }}
                 className="w-full py-3.5 px-5 rounded-xl bg-gray-900 text-white font-semibold text-sm hover:bg-black active:scale-[0.98] transition-all flex items-center justify-between"
               >
-                <span>Betaal nu</span>
+                <span>{t('payNow') || 'Betaal nu'}</span>
                 <span className="bg-white/20 px-3 py-1 rounded-lg">€{remainingAmount.toFixed(2).replace('.', ',')}</span>
               </button>
             </div>

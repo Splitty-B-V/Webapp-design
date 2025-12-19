@@ -187,5 +187,20 @@
   "selectMenu": "Selecteer een menu",
   "menuFood": "ETEN",
   "menuBeverages": "DRANKEN",
-  "menuKids": "KINDERMENU"
+  "menuKids": "KINDERMENU",
+  "search": "Zoek",
+  "resultsFound": "resultaten gevonden",
+  "noResultsFor": "Geen resultaten gevonden voor",
+  "subBreakfast": "ONTBIJT",
+  "subItalian": "ITALIAANS",
+  "subBurgers": "BURGERS",
+  "subSalads": "SALADES",
+  "subMains": "HOOFDGERECHTEN",
+  "subHotDrinks": "WARME DRANKEN",
+  "subColdDrinks": "KOUDE DRANKEN",
+  "subCocktails": "COCKTAILS",
+  "subWine": "WIJN",
+  "subKidsFood": "KINDERETEN",
+  "subKidsDrinks": "KINDERDRANKEN",
+  "subKidsDesserts": "KINDERDESSERTS"
 }
