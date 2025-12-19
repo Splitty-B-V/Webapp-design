@@ -591,7 +591,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                 }}
                 className="w-full py-3.5 px-5 rounded-xl bg-gray-900 text-white font-semibold text-sm hover:bg-black active:scale-[0.98] transition-all flex items-center justify-between"
               >
-                <span>{t('payNow') || 'Betaal nu'}</span>
+                <span>{t('viewBillAndPay') || 'Bekijk rekening & betaal'}</span>
                 <span className="bg-white/20 px-3 py-1 rounded-lg">€{remainingAmount.toFixed(2).replace('.', ',')}</span>
               </button>
             </div>

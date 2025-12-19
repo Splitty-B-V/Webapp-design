@@ -15,6 +15,7 @@ export default function LandingView({ onViewBill, onViewMenu }: LandingViewProps
   const { totalBill, orderItems } = useBill()
   const { t } = useLanguage()
   const [hasOrdered, setHasOrdered] = useState(true)
+  const [isItemsExpanded, setIsItemsExpanded] = useState(false)
 
   // Get total items count
   const totalItems = orderItems.reduce((sum, item) => sum + item.quantity, 0)
@@ -85,15 +86,55 @@ export default function LandingView({ onViewBill, onViewMenu }: LandingViewProps
                   </div>
                 </div>
 
-                {/* Items indicator */}
-                <div className="flex items-center gap-3">
-                  <div className="inline-flex items-center gap-2 bg-emerald-50 rounded-full px-3.5 py-1.5">
-                    <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center">
-                      <span className="text-gray-900 text-xs font-bold">{totalItems}</span>
+                {/* Expandable Items Section */}
+                <div>
+                  {/* Clickable header */}
+                  <button
+                    onClick={() => setIsItemsExpanded(!isItemsExpanded)}
+                    className="flex items-center gap-3 group"
+                  >
+                    <div className="inline-flex items-center gap-2 bg-gray-100 rounded-full px-3 py-1.5 group-hover:bg-gray-200 transition-colors">
+                      <span className="text-gray-900 text-sm font-medium">{totalItems} items</span>
+                      <svg
+                        className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${isItemsExpanded ? 'rotate-180' : ''}`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
                     </div>
-                    <span className="text-gray-900 text-sm font-medium">items</span>
+                    <span className="text-gray-400 text-xs">{t('inclusiveOfTaxes') || 'Inclusief BTW'}</span>
+                  </button>
+
+                  {/* Expandable items list */}
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isItemsExpanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="space-y-1">
+                        {orderItems.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between py-2"
+                          >
+                            <div className="flex items-center gap-3 min-w-0 flex-1">
+                              <div className="bg-gray-100 text-gray-900 text-xs font-bold w-6 h-6 rounded flex items-center justify-center flex-shrink-0">
+                                {item.quantity}
+                              </div>
+                              <div className="min-w-0">
+                                <p className="text-black font-medium text-sm truncate">{item.name}</p>
+                                <p className="text-gray-500 text-xs">€{item.unitPrice.toFixed(2).replace('.', ',')} {t('perUnit') || 'per stuk'}</p>
+                              </div>
+                            </div>
+                            <span className="text-black font-semibold text-sm ml-4 flex-shrink-0">€{item.totalPrice.toFixed(2).replace('.', ',')}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-gray-400 text-xs">{t('inclusiveOfTaxes') || 'Inclusief BTW'}</span>
                 </div>
               </>
             ) : (
@@ -122,7 +163,7 @@ export default function LandingView({ onViewBill, onViewMenu }: LandingViewProps
                     onClick={onViewBill}
                     className="w-full py-3.5 px-5 rounded-xl bg-gray-900 text-white font-semibold text-sm hover:bg-black active:scale-[0.98] transition-all"
                   >
-                    {t('payNow') || 'Betaal nu'}
+                    {t('viewBillAndPay') || 'Bekijk rekening & betaal'}
                   </button>
 
                   {/* View Menu Button */}
