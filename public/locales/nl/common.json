@@ -204,5 +204,9 @@
   "subKidsFood": "KINDERETEN",
   "subKidsDrinks": "KINDERDRANKEN",
   "subKidsDesserts": "KINDERDESSERTS",
-  "price": "Prijs"
+  "price": "Prijs",
+  "myPicksList": "Mijn lijstje",
+  "myPicksDescription": "Laat dit aan de ober zien om te bestellen",
+  "noSavedItems": "Nog geen items toegevoegd",
+  "backToMenu": "Terug naar menu"
 }

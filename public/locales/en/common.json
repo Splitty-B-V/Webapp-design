@@ -203,5 +203,9 @@
   "subKidsFood": "KIDS FOOD",
   "subKidsDrinks": "KIDS DRINKS",
   "subKidsDesserts": "KIDS DESSERTS",
-  "price": "Price"
+  "price": "Price",
+  "myPicksList": "My picks",
+  "myPicksDescription": "Show this to the waiter to order",
+  "noSavedItems": "No items added yet",
+  "backToMenu": "Back to menu"
 }

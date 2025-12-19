@@ -203,5 +203,9 @@
   "subKidsFood": "KINDERESSEN",
   "subKidsDrinks": "KINDERGETRÄNKE",
   "subKidsDesserts": "KINDERDESSERTS",
-  "price": "Preis"
+  "price": "Preis",
+  "myPicksList": "Meine Auswahl",
+  "myPicksDescription": "Zeigen Sie dies dem Kellner zum Bestellen",
+  "noSavedItems": "Noch keine Artikel hinzugefügt",
+  "backToMenu": "Zurück zum Menü"
 }

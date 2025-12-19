@@ -210,6 +210,27 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
   const [cart, setCart] = useState<CartItem[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<MenuItem | null>(null)
+  const [savedItems, setSavedItems] = useState<Set<string>>(new Set())
+  const [showSavedList, setShowSavedList] = useState(false)
+
+  // Toggle item in saved list
+  const toggleSavedItem = (itemId: string, e: React.MouseEvent) => {
+    e.stopPropagation() // Don't open product detail
+    setSavedItems(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(itemId)) {
+        newSet.delete(itemId)
+      } else {
+        newSet.add(itemId)
+      }
+      return newSet
+    })
+  }
+
+  // Get saved items as array with full details
+  const getSavedItemsList = () => {
+    return allItems.filter(item => savedItems.has(item.id))
+  }
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
@@ -491,8 +512,24 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                     <div
                       key={item.id}
                       onClick={() => setSelectedProduct(item)}
-                      className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow active:scale-[0.98]"
+                      className={`bg-white rounded-2xl border shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-all active:scale-[0.98] relative ${
+                        savedItems.has(item.id) ? 'border-emerald-200 ring-1 ring-emerald-100' : 'border-gray-100'
+                      }`}
                     >
+                      {/* Heart button - top right of card */}
+                      <button
+                        onClick={(e) => toggleSavedItem(item.id, e)}
+                        className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all z-10 ${
+                          savedItems.has(item.id)
+                            ? 'text-red-500 scale-110'
+                            : 'text-gray-300 hover:text-red-400'
+                        }`}
+                      >
+                        <svg className="w-6 h-6" viewBox="0 0 24 24" fill={savedItems.has(item.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                      </button>
+
                       <div className="flex p-4 gap-4">
                         <div className="relative w-24 h-24 flex-shrink-0">
                           <Image
@@ -502,7 +539,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                             className="object-cover rounded-xl"
                           />
                         </div>
-                        <div className="flex-1 min-w-0">
+                        <div className="flex-1 min-w-0 pr-6">
                           <p className="text-xs text-gray-400 mb-1">{t(item.subCategoryKey) || item.subCategoryName}</p>
                           <h3 className="font-semibold text-gray-900 text-base mb-1">{item.name}</h3>
                           <p className="text-gray-500 text-sm line-clamp-2 mb-2">{item.description}</p>
@@ -549,8 +586,24 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                         <div
                           key={item.id}
                           onClick={() => setSelectedProduct(item)}
-                          className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer active:scale-[0.98]"
+                          className={`bg-white rounded-2xl border shadow-sm overflow-hidden hover:shadow-md transition-all cursor-pointer active:scale-[0.98] relative ${
+                            savedItems.has(item.id) ? 'border-red-200 ring-1 ring-red-100' : 'border-gray-100'
+                          }`}
                         >
+                          {/* Heart button - top right of card */}
+                          <button
+                            onClick={(e) => toggleSavedItem(item.id, e)}
+                            className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all z-10 ${
+                              savedItems.has(item.id)
+                                ? 'text-red-500 scale-110'
+                                : 'text-gray-300 hover:text-red-400'
+                            }`}
+                          >
+                            <svg className="w-6 h-6" viewBox="0 0 24 24" fill={savedItems.has(item.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                          </button>
+
                           <div className="flex p-4 gap-4">
                             {/* Item Image */}
                             <div className="relative w-24 h-24 flex-shrink-0">
@@ -563,7 +616,7 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                             </div>
 
                             {/* Item Details */}
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 pr-6">
                               <h3 className="font-semibold text-gray-900 text-base mb-1">{item.name}</h3>
                               <p className="text-gray-500 text-sm line-clamp-2 mb-2">{item.description}</p>
                               <span className="font-bold text-gray-900 text-lg">
@@ -581,9 +634,26 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
           </div>
           )}
 
-          {/* Sticky Pay Button - only show when there's an outstanding amount */}
-          {remainingAmount > 0 && onViewBill && (
-            <div className="sticky bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] p-4">
+          {/* Sticky Bottom Buttons */}
+          <div className="sticky bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] p-4 space-y-2">
+            {/* Saved Items Button - only show when there are saved items */}
+            {savedItems.size > 0 && (
+              <button
+                onClick={() => setShowSavedList(true)}
+                className="w-full py-3 px-4 rounded-xl bg-red-50 text-red-600 font-semibold text-sm hover:bg-red-100 active:scale-[0.98] transition-all flex items-center justify-between border border-red-200"
+              >
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                  <span>{t('myPicksList') || 'Mijn lijstje'}</span>
+                </div>
+                <span className="bg-red-500 text-white px-2.5 py-0.5 rounded-full text-xs font-bold">{savedItems.size}</span>
+              </button>
+            )}
+
+            {/* Pay Button - only show when there's an outstanding amount */}
+            {remainingAmount > 0 && onViewBill && (
               <button
                 onClick={() => {
                   handleClose()
@@ -594,7 +664,105 @@ export default function MenuView({ isOpen, onClose, skipCategorySelection = fals
                 <span>{t('viewBillAndPay') || 'Bekijk rekening & betaal'}</span>
                 <span className="bg-white/20 px-3 py-1 rounded-lg">€{remainingAmount.toFixed(2).replace('.', ',')}</span>
               </button>
-            </div>
+            )}
+          </div>
+
+          {/* Saved Items List Popup */}
+          {showSavedList && (
+            <>
+              {/* Backdrop */}
+              <div
+                className="fixed inset-0 bg-black/60 z-[60] animate-fade-in"
+                onClick={() => setShowSavedList(false)}
+              />
+
+              {/* Bottom Drawer */}
+              <div className="fixed inset-x-0 bottom-0 z-[70] animate-slide-up">
+                <div className="max-w-[500px] mx-auto">
+                  <div className="bg-white rounded-t-3xl shadow-2xl max-h-[85vh] overflow-hidden flex flex-col">
+                    {/* Header */}
+                    <div className="px-5 pt-5 pb-4 border-b border-gray-100">
+                      <div className="flex items-center justify-between mb-2">
+                        <h2 className="text-xl font-bold text-gray-900">{t('myPicksList') || 'Mijn lijstje'}</h2>
+                        <button
+                          onClick={() => setShowSavedList(false)}
+                          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                        >
+                          <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                      <p className="text-gray-500 text-sm">{t('myPicksDescription') || 'Laat dit aan de ober zien om te bestellen'}</p>
+                    </div>
+
+                    {/* Saved Items */}
+                    <div
+                      className="flex-1 overflow-y-auto px-5 py-4"
+                      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    >
+                      {getSavedItemsList().length > 0 ? (
+                        <div className="space-y-3">
+                          {getSavedItemsList().map((item) => (
+                            <div
+                              key={item.id}
+                              className="flex items-center gap-4 bg-gray-50 rounded-xl p-3"
+                            >
+                              {/* Item Image */}
+                              <div className="relative w-16 h-16 flex-shrink-0">
+                                <Image
+                                  src={getImageUrl(item.image)}
+                                  alt={item.name}
+                                  fill
+                                  className="object-cover rounded-lg"
+                                />
+                              </div>
+
+                              {/* Item Details */}
+                              <div className="flex-1 min-w-0">
+                                <h3 className="font-semibold text-gray-900 text-sm">{item.name}</h3>
+                                <span className="font-bold text-gray-700 text-sm">
+                                  €{item.price.toFixed(2).replace('.', ',')}
+                                </span>
+                              </div>
+
+                              {/* Remove Button */}
+                              <button
+                                onClick={(e) => toggleSavedItem(item.id, e)}
+                                className="w-8 h-8 flex items-center justify-center rounded-full bg-red-100 text-red-500 hover:bg-red-200 transition-colors flex-shrink-0"
+                              >
+                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center py-12">
+                          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                            <svg className="w-8 h-8 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                          </div>
+                          <p className="text-gray-500 text-center">{t('noSavedItems') || 'Nog geen items toegevoegd'}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Footer */}
+                    <div className="px-5 pb-6 pt-4 bg-white border-t border-gray-100">
+                      <button
+                        onClick={() => setShowSavedList(false)}
+                        className="w-full py-3.5 px-5 rounded-xl bg-gray-900 text-white font-semibold text-sm hover:bg-black active:scale-[0.98] transition-all"
+                      >
+                        {t('backToMenu') || 'Terug naar menu'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
 
           {/* Product Detail Popup */}
