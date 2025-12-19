@@ -174,5 +174,17 @@
   "askWaiter": "Fragen Sie den Kellner nach unseren Spezialitäten!",
   "refreshPage": "Seite aktualisieren",
   "payYourItems": "Bezahle deine Artikel",
-  "deleteSplit": "Split löschen"
+  "deleteSplit": "Split löschen",
+  "viewMenu": "Speisekarte ansehen",
+  "payNow": "Jetzt bezahlen",
+  "payableAmount": "Zu zahlender Betrag",
+  "inclusiveOfTaxes": "Preis inkl. MwSt",
+  "menuComingSoon": "Speisekarte-Funktion kommt bald!",
+  "payNowCaption": "Bezahlen Sie Ihre Rechnung in 10 Sekunden. Kein Kellner nötig!",
+  "nothingOrderedYet": "Noch nichts bestellt!",
+  "askWaiterSpecialties": "Fragen Sie einen Kellner nach unseren Spezialitäten!",
+  "selectMenu": "Wählen Sie ein Menü",
+  "menuFood": "ESSEN",
+  "menuBeverages": "GETRÄNKE",
+  "menuKids": "KINDERMENÜ"
 }

@@ -174,5 +174,17 @@
   "askWaiter": "Ask the waiter about our specialties!",
   "refreshPage": "Refresh page",
   "payYourItems": "Pay your items",
-  "deleteSplit": "Delete split"
+  "deleteSplit": "Delete split",
+  "viewMenu": "View menu",
+  "payNow": "Pay now",
+  "payableAmount": "Payable amount",
+  "inclusiveOfTaxes": "Price includes VAT",
+  "menuComingSoon": "Menu feature coming soon!",
+  "payNowCaption": "Pay your bill now in 10 seconds. No need to call the waiter!",
+  "nothingOrderedYet": "Nothing ordered yet!",
+  "askWaiterSpecialties": "Ask a waiter about our specialties!",
+  "selectMenu": "Select a menu",
+  "menuFood": "FOOD",
+  "menuBeverages": "BEVERAGES",
+  "menuKids": "KIDS MENU"
 }

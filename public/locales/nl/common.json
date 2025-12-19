@@ -175,5 +175,17 @@
   "askWaiter": "Vraag de ober naar onze specialiteiten!",
   "refreshPage": "Ververs pagina",
   "payYourItems": "Betaal je items",
-  "deleteSplit": "Verwijder split"
+  "deleteSplit": "Verwijder split",
+  "viewMenu": "Bekijk menu",
+  "payNow": "Betaal nu",
+  "payableAmount": "Te betalen bedrag",
+  "inclusiveOfTaxes": "Prijs inclusief BTW",
+  "menuComingSoon": "Menu functie komt binnenkort!",
+  "payNowCaption": "Betaal je rekening in 10 seconden. Geen ober nodig!",
+  "nothingOrderedYet": "Er is nog niets besteld!",
+  "askWaiterSpecialties": "Vraag een ober naar onze specialiteiten!",
+  "selectMenu": "Selecteer een menu",
+  "menuFood": "ETEN",
+  "menuBeverages": "DRANKEN",
+  "menuKids": "KINDERMENU"
 }

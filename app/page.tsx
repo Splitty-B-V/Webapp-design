@@ -10,18 +10,23 @@ import { useBill } from '@/contexts/BillContext'
 import { useLanguage } from '@/contexts/LanguageContext'
 import BillFullyPaidView from '@/components/BillFullyPaidView'
 import LanguageToggle from '@/components/LanguageToggle'
+import LandingView from '@/components/LandingView'
+import MenuView from '@/components/MenuView'
+
+type ViewState = 'loading' | 'landing' | 'bill'
 
 export default function BillPage() {
   const { orderItems, totalBill, paidAmount, remainingAmount, isFullyPaid, activeSplitMode, resetBill } = useBill()
   const { t } = useLanguage()
-  const [isLoading, setIsLoading] = useState(true)
-  
+  const [currentView, setCurrentView] = useState<ViewState>('loading')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   useEffect(() => {
     // Handle loading
     const loadTimer = setTimeout(() => {
-      setIsLoading(false)
+      setCurrentView('landing')
     }, 1500) // Show loading screen for 1.5 seconds
-    
+
     return () => {
       clearTimeout(loadTimer)
     }
@@ -36,8 +41,18 @@ export default function BillPage() {
   
   const paidPercentage = Math.round((paidAmount / total) * 100)
   
+  // Handle menu button click - opens menu drawer
+  const handleViewMenu = () => {
+    setIsMenuOpen(true)
+  }
+
+  // Handle pay bill button click
+  const handleViewBill = () => {
+    setCurrentView('bill')
+  }
+
   // Show loading screen only during initial load
-  if (isLoading) {
+  if (currentView === 'loading') {
     return (
       <>
         <style jsx>{`
@@ -119,8 +134,18 @@ export default function BillPage() {
     return <BillFullyPaidView />
   }
 
+  // Show landing page
+  if (currentView === 'landing') {
+    return (
+      <>
+        <LandingView onViewBill={handleViewBill} onViewMenu={handleViewMenu} />
+        <MenuView isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} onViewBill={handleViewBill} />
+      </>
+    )
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50" style={{ overscrollBehavior: 'none' }}>
+    <div className="min-h-screen bg-[#dcf5e5]" style={{ overscrollBehavior: 'none' }}>
       <div className="flex flex-col min-h-screen max-w-[500px] mx-auto w-full" style={{ overscrollBehavior: 'none' }}>
         {/* Restaurant Banner */}
         <section 
@@ -144,7 +169,17 @@ export default function BillPage() {
         
         <main className="w-full flex-grow">
           {/* Spacing for logo overlap */}
-          <div className="h-16 bg-white"></div>
+          <div className="h-16 bg-white flex items-center justify-end px-4">
+            <button
+              onClick={handleViewMenu}
+              className="flex items-center gap-1.5 text-emerald-600 hover:text-emerald-700 transition-colors text-sm font-medium"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              {t('viewMenu') || 'Bekijk menu'}
+            </button>
+          </div>
           
           {/* Active Split Mode Banner */}
           {activeSplitMode && (
@@ -286,6 +321,9 @@ export default function BillPage() {
           </div>
         </div>
       </div>
+
+      {/* Menu View */}
+      <MenuView isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} skipCategorySelection onViewBill={() => setIsMenuOpen(false)} />
     </div>
   )
 }
